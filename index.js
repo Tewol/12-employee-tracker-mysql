@@ -95,23 +95,57 @@ const start = () => {
     });
 };
 
-const artistSearch = () => {
+const addDepartment = () => {
+  // prompt for department name to add it to the table
   inquirer
-    .prompt({
-      name: 'artist',
-      type: 'input',
-      message: 'What artist would you like to search for?',
-    })
+    .prompt([
+      {
+        name: 'name',
+        type: 'input',
+        message: 'What is the name of the department',
+      }
+    ])
     .then((answer) => {
-      const query = 'SELECT position, song, year FROM top5000 WHERE ?';
-      connection.query(query, { artist: answer.artist }, (err, res) => {
-        res.forEach(({ position, song, year }) => {
-          console.log(
-            `Position: ${position} || Song: ${song} || Year: ${year}`
-          );
-        });
-        runSearch();
-      });
+      // Insert a department name 
+      connection.query(
+        'INSERT INTO department SET ?',
+        {
+          name: answer.name
+        },
+        (err) => {
+          if (err) throw err;
+          console.log('Department was added!');
+          // re-prompt the user for more action
+          start();
+        }
+      );
+    });
+};
+
+const addRole = () => {
+  // prompt for info about the item being put up for auction
+  inquirer
+    .prompt([
+      {
+        name: 'name',
+        type: 'input',
+        message: 'What is the name of the department',
+      }
+    ])
+    .then((answer) => {
+      // when finished prompting, insert a new item into the db with that info
+      connection.query(
+        'INSERT INTO department SET ?',
+        {
+          name: answer.name
+        },
+        (err) => {
+          if (err) throw err;
+          console.log('Department was added!');
+          // re-prompt the user for if they add, view or update
+          start();
+        }
+      );
     });
 };
 
