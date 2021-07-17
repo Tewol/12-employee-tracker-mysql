@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Tewol/12-employee-tracker-mysql#readme",
   "dependencies": {
+    "console.table": "^0.10.0",
     "cred": "^0.6.0",
     "inquirer": "^8.1.2",
     "mysql": "^2.18.1",
