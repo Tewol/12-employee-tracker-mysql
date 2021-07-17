@@ -6,7 +6,7 @@ The application manages a company's employees using node, inquirer, and MySQL.
 
 ## Design and Requirment
 
-![Employe tracker database UML](Assets/employee-tracker.gif)
+![Employe tracker database UML](images/employee.png)
 
 * Department:
 

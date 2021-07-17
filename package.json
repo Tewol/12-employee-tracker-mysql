@@ -1,0 +1,26 @@
+{
+  "name": "12-employee-tracker-mysql",
+  "version": "1.0.0",
+  "description": "This is a simple employee tracker application that ables a user to view and manage the departments, roles, and employees.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tewol/12-employee-tracker-mysql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tewol/12-employee-tracker-mysql/issues"
+  },
+  "homepage": "https://github.com/Tewol/12-employee-tracker-mysql#readme",
+  "dependencies": {
+    "cred": "^0.6.0",
+    "inquirer": "^8.1.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5"
+  }
+}
