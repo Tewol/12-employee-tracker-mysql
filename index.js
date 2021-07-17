@@ -1,6 +1,5 @@
 const mysql2 = require('mysql2');
 const inquirer = require('inquirer');
-
 // create the connection information for the sql database
 //const {config} = require("./creds");
 //const connection = mysql2.createConnection(config);
@@ -16,6 +15,8 @@ const connection = mysql2.createConnection({
   database: 'employeeTracker_DB',
 });
 
+const cTable = require('console.table');
+
 
 //Prompts the user for what action they should take
 const start = () => {
@@ -25,19 +26,19 @@ const start = () => {
       type: 'list',
       message: 'Would you like to do do?',
       choices: ['Add department', 
-                'Add role', 
-                'Add employee', 
-                'View departments', 
-                'view roles', 
-                'View employees', 
-                'Update employee managers',
-                'View employees by manager',
-                'Delete departments',
-                'Delete roles',
-                'Delete employees',
-                'View total budget of a department',
-                'Exit',
-              ],
+              'Add role', 
+              'Add employee', 
+              'View all departments', 
+              'view all roles', 
+              'View all employees', 
+              'Update employee managers',
+              'View employees by manager',
+              'Delete departments',
+              'Delete roles',
+              'Delete employees',
+              'View total budget of a department',
+              'Exit',
+            ],
     })
     .then((answer) => {
       switch (answer.action) {
@@ -53,16 +54,16 @@ const start = () => {
           addEmployee();
           break;
 
-        case 'View departments':
-          viewDepartment();
+        case 'View all departments':
+          viewAllDepartment();
           break;
 
-        case 'view roles':
-          viewRoles();
+        case 'view all roles':
+          viewAllRoles();
           break;
         
-        case 'View employees':
-          viewEmployees();
+        case 'View all employees':
+          viewAllEmployees();
           break;
         
         case 'Update employee Role':
@@ -145,6 +146,12 @@ const addRole = () => {
         type: 'input',
         message: 'What is the salary of the role',
       },
+      {
+        name: 'department',
+        type: 'list',
+        message: " What is the department",
+        choices: ['1', '2', '3']
+      },
     ])
     .then((answer) => {
       // insert a new item into the db with that info
@@ -178,6 +185,18 @@ const addEmployee = () => {
         type: 'input',
         message: 'What is employee last name',
       },
+      {
+        name: 'role',
+        type: 'list',
+        message: " What is the employee's role",
+        choices: ['Sales Lead', 'SalesPerson', 'Lead Engineer']
+      },
+      {
+        name: 'manager',
+        type: 'list',
+        message: " What is the employee's manager",
+        choices: ['Sales Lead', 'SalesPerson', 'Lead Engineer']
+      },
     ])
     .then((answer) => {
       // Insert a new employe information in to the employee table
@@ -189,6 +208,7 @@ const addEmployee = () => {
         {
           last_name: answer.last_name
         },
+        
         (err) => {
           if (err) throw err;
           console.log('New employee information was added successfully!');
@@ -198,6 +218,52 @@ const addEmployee = () => {
       );
     });
 };
+
+const viewAllDepartment = () => {
+
+  //View department
+  connection.query(
+    'SELECT * FROM department', (err, res)=>{
+      if (err) throw err;
+
+      // Log all results of the SELECT statement
+      console.table(res);
+      //connection.end();
+      start();
+
+    });
+};
+
+const viewAllRoles = () => {
+
+  //View department
+  connection.query(
+    'SELECT * FROM role', (err, res)=>{
+      if (err) throw err;
+
+      // Log all results of the SELECT statement
+      console.table(res);
+      //connection.end();
+      start();
+
+    });
+};
+
+const viewAllEmployees = () => {
+
+  //View department
+  connection.query(
+    'SELECT * FROM employee', (err, res)=>{
+      if (err) throw err;
+
+      // Log all results of the SELECT statement
+      console.table(res);
+      //connection.end();
+      start();
+
+    });
+};
+
 
 
 // connect to the mysql server and sql database
@@ -209,33 +275,7 @@ connection.connect((err) => {
 
 
 /*
-// SELECT STATEMENT USING mysql package, placeholders, and objects
-connection.query(
-  'SELECT * FROM <tablename> WHERE ?',
-  {
-    // key/value pairs for each column querying against
-    // column_name: value
-    id: 1
-  },
-  (err) => {
-    if (err) throw err;
-    // whatever happens if everything goes well
-  }
-);
 
-// UPDATE STATEMENT USING mysql package, placeholders, and objects
-connection.query(
-  'UPDATE <tablename> SET ? WHERE ?',
-  [
-    { column_name: dataToUpdate },   // what are we updating; multiple keys/values are fine
-    { id: idValueToChange }          // which record/row are we updating
-  ],
-  (error) => {
-    if (error) throw err;
-    console.log('Bid placed successfully!');
-    start();
-  }
-);
 
 // DELETE STATEMENT USING mysql package, placeholders, and objects
 connection.query(
