@@ -36,6 +36,7 @@ const start = () => {
                 'Delete roles',
                 'Delete employees',
                 'View total budget of a department',
+                'Exit',
               ],
     })
     .then((answer) => {
@@ -58,39 +59,47 @@ const start = () => {
 
         case 'view roles':
           viewRoles();
-        break;
+          break;
         
         case 'View employees':
-          songAndAlbumSearch();
-        break;
+          viewEmployees();
+          break;
         
-        case 'Update employee managers':
-          songAndAlbumSearch();
-        break; 
+        case 'Update employee Role':
+          updateEmployeeRole();
+          break; 
+        
+        case 'Update employee by manager':
+          updateEmployeeManagers();
+          break; 
         
         case 'View employees by manager':
-          songAndAlbumSearch();
-        break; 
-        
+          viewEmployeesManager();
+          break;
+
         case 'Delete departments':
-          songAndAlbumSearch();
-        break;
-
-        case 'Delete roles':
-          songAndAlbumSearch();
-        break;
+          deleteDepartments();
+          break;
         
-        case 'Delete employees':
-          songAndAlbumSearch();
-        break;
+        case 'Delete Roles':
+          deleteRoles();
+          break;
 
+        case 'Delete Employees':
+          deleteEmployees();
+          break;
+          
         case 'View total budget of a department':
-          songAndAlbumSearch();
-        break;
+          viewTotalBudget();
+          break;
+          
+        case 'Exit':
+          connection.end();
+          break;
 
         default:
           console.log(`Invalid action: ${answer.action}`);
-        break;
+          break;
       }
     });
 };
@@ -114,7 +123,7 @@ const addDepartment = () => {
         },
         (err) => {
           if (err) throw err;
-          console.log('Department was added!');
+          console.log('New department was added successfully!');
           // re-prompt the user for more action
           start();
         }
@@ -123,53 +132,67 @@ const addDepartment = () => {
 };
 
 const addRole = () => {
-  // prompt for info about the item being put up for auction
+  // promp to add role in to 
   inquirer
     .prompt([
       {
-        name: 'name',
+        name: 'titile',
         type: 'input',
-        message: 'What is the name of the department',
-      }
+        message: 'What is the name of the role',
+      },
+      {
+        name: 'salary',
+        type: 'input',
+        message: 'What is the salary of the role',
+      },
     ])
     .then((answer) => {
-      // when finished prompting, insert a new item into the db with that info
+      // insert a new item into the db with that info
       connection.query(
-        'INSERT INTO department SET ?',
+        'INSERT INTO role SET ?',
         {
-          name: answer.name
+          titile: answer.titile,
+          salary: answer.salary
         },
         (err) => {
           if (err) throw err;
-          console.log('Department was added!');
-          // re-prompt the user for if they add, view or update
+          console.log('New role was added successfully!');
+          // re-prompt the user for more action
           start();
         }
       );
     });
 };
 
-const addDepartment = () => {
-  // prompt for info about the item being put up for auction
+const addEmployee = () => {
+  // prompt for adding employee
   inquirer
     .prompt([
       {
-        name: 'name',
+        name: 'first_name',
         type: 'input',
-        message: 'What is the name of the department',
-      }
+        message: 'What is employee firt name',
+      },
+      {
+        name: 'last_name',
+        type: 'input',
+        message: 'What is employee last name',
+      },
     ])
     .then((answer) => {
-      // when finished prompting, insert a new item into the db with that info
+      // Insert a new employe information in to the employee table
       connection.query(
-        'INSERT INTO department SET ?',
+        'INSERT INTO employee SET ?',
         {
-          name: answer.name
+          first_name: answer.first_name
+        },
+        {
+          last_name: answer.last_name
         },
         (err) => {
           if (err) throw err;
-          console.log('Department was added!');
-          // re-prompt the user for if they add, view or update
+          console.log('New employee information was added successfully!');
+          // re-prompt the user for more action
           start();
         }
       );
@@ -180,7 +203,7 @@ const addDepartment = () => {
 // connect to the mysql server and sql database
 connection.connect((err) => {
   if (err) throw err;
-  // run the start function after the connection is made to prompt the user
+  // run the start function after the connection is made
   start();
 });
 
