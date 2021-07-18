@@ -33,9 +33,9 @@ Build a command-line application that at a minimum allows the user to:
   * Add departments, 
   * Add roles, 
   * Add employees
-  * View departments, 
-  * Add roles, 
-  * Add employees,
+  * View all departments, 
+  * Add all roles, 
+  * Add all employees,
   * Update employee roles
 
 Bonus points if you're able to:
@@ -43,9 +43,11 @@ Bonus points if you're able to:
   * Update employee managers,
   * View employees by manager,
   * Delete departments, 
-  * Delete roles, and 
-  * Delete employees
-  * View the total utilized budget of a department -- ie the combined salaries of all employees in that department
+  * Delete roles, 
+  * Delete employees,
+  * View the total utilized budget of a department 
+  
+  ie combined salaries of all employees in that department
 
 ## Sample SQL JOINS:
 
@@ -54,23 +56,13 @@ Bonus points if you're able to:
 
 ![Employee Tracker](./images/employee_Tracker.gif)
 
-### Hints
-
-* You may wish to include a `seed.sql` file to pre-populate your database. This will make development of individual features much easier.
-
-* Review the week's activities for a refresher on MySQL.
-
-* Check out [SQL Bolt](https://sqlbolt.com/) for some extra MySQL help.
-
-
-**Important**: You will be committing a file that contains your database credentials. 
-
 
 ## Submission
 
 * URL of the GitHub repository: https://tewol.github.io/12-employee-tracker-mysql/
 
-* A video demonstrating the entirety of the app's functionality: 
+* A video demonstrating the entirety of the app's functionality: https://github.com/Tewol/12-employee-tracker-mysql/blob/main/images/employee_Tracker.gif
+
 
 - - -
 © 2021 Hewan Redie.
