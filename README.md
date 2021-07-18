@@ -52,7 +52,7 @@ Bonus points if you're able to:
 
 ## Demo
 
-![Employee Tracker](Assets/employee-tracker.gif)
+![Employee Tracker](./images/employee_Tracker.gif)
 
 ### Hints
 

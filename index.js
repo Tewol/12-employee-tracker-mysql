@@ -264,7 +264,28 @@ const viewAllEmployees = () => {
     });
 };
 
-
+const updateEmployeeRole = () => {
+  // UPDATE STATEMENT USING mysql package, placeholders, and objects
+    connection.query(
+      'UPDATE employee SET ? WHERE ?',
+      [
+        // what are we updating; multiple keys/values are fine
+        { 
+          //role_id: dataToUpdate 
+        },   
+        // which record/row are we updating
+        { 
+          //id: idValueToChange 
+        }          
+      ],
+      (error) => {
+        if (error) throw err;
+        console.log('Bid placed successfully!');
+        start();
+      }
+    );
+  };
+  
 
 // connect to the mysql server and sql database
 connection.connect((err) => {
