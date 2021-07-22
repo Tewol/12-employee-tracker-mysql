@@ -17,7 +17,6 @@ const connection = mysql2.createConnection({
 
 const cTable = require('console.table');
 
-
 //Prompts the user for what action they should take
 const start = () => {
   inquirer
@@ -30,7 +29,8 @@ const start = () => {
               'Add employee', 
               'View all departments', 
               'view all roles', 
-              'View all employees', 
+              'View all employees',
+              'Update employee role', 
               'Update employee managers',
               'View employees by manager',
               'Delete departments',
@@ -66,7 +66,7 @@ const start = () => {
           viewAllEmployees();
           break;
         
-        case 'Update employee Role':
+        case 'Update employee role':
           updateEmployeeRole();
           break; 
         
@@ -271,20 +271,42 @@ const updateEmployeeRole = () => {
       [
         // what are we updating; multiple keys/values are fine
         { 
-          //role_id: dataToUpdate 
+          role_id: 9, 
         },   
         // which record/row are we updating
         { 
-          //id: idValueToChange 
+          id: 1, 
         }          
       ],
-      (error) => {
-        if (error) throw err;
-        console.log('Bid placed successfully!');
+      (err, res) => {
+        if (err) throw err;
+        console.log(`${res.affectedRows} Employee role updated!\n`);
         start();
       }
     );
-  };
+};
+
+const updateEmployeeManagers = () => {
+  // UPDATE STATEMENT USING mysql package, placeholders, and objects
+    connection.query(
+      'UPDATE employee SET ? WHERE ?',
+      [
+        // what are we updating; multiple keys/values are fine
+        { 
+          manager_id: 1, 
+        },   
+        // which record/row are we updating
+        { 
+          id: 2, 
+        }          
+      ],
+      (err, res) => {
+        if (err) throw err;
+        console.log(`${res.affectedRows} Employee's manager updated!\n`);
+        start();
+      }
+    );
+};
   
 
 // connect to the mysql server and sql database

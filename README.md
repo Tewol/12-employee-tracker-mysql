@@ -30,12 +30,12 @@ The application manages a company's employees using node, inquirer, and MySQL.
   
 Build a command-line application that at a minimum allows the user to:
 
-  * Add departments, 
-  * Add roles, 
+  * Add departments 
+  * Add roles 
   * Add employees
-  * View all departments, 
-  * Add all roles, 
-  * Add all employees,
+  * View all departments
+  * View all roles 
+  * View all employees
   * Update employee roles
 
 Bonus points if you're able to:
